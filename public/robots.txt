@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://matiassalicru.vercel.app/sitemap-index.xml
+Sitemap: https://matiassalicru.pages.dev/sitemap-index.xml
