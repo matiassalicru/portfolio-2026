@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
-  site: 'https://portfolio-2026.pages.dev',
+  site: 'https://matiassalicru.pages.dev',
   output: 'static',
   i18n: {
     locales: ['en', 'es'],
