@@ -18,7 +18,7 @@ const translations = {
     hero: {
       tagline: 'Senior Frontend Engineer',
       subtagline: 'Building fast, scalable systems that ship.',
-      location: 'Catamarca, Argentina · Open to Remote',
+      location: 'Catamarca, Argentina · Open to Remote & Relocation',
       cta: 'Get in touch',
       metrics: {
         deploy: { value: '80%', label: 'Deployment Time Reduction' },
@@ -170,7 +170,7 @@ const translations = {
       tagline: 'Senior Frontend Engineer',
       subtagline:
         'Construyo sistemas rápidos y escalables que llegan a producción.',
-      location: 'Catamarca, Argentina · Disponible para trabajo remoto',
+      location: 'Catamarca, Argentina · Disponible para trabajo remoto o reubicación',
       cta: 'Hablemos',
       metrics: {
         deploy: { value: '80%', label: 'Reducción en tiempo de deploy' },
