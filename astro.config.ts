@@ -2,9 +2,12 @@ import { defineConfig, fontProviders } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 import sitemap from '@astrojs/sitemap'
 
+import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
   site: 'https://portfolio-2026.pages.dev',
   output: 'static',
+
   i18n: {
     locales: ['en', 'es'],
     defaultLocale: 'en',
@@ -13,9 +16,11 @@ export default defineConfig({
       redirectToDefaultLocale: true,
     },
   },
+
   vite: {
     plugins: [tailwindcss()],
   },
+
   integrations: [
     sitemap({
       i18n: {
@@ -27,6 +32,7 @@ export default defineConfig({
       },
     }),
   ],
+
   fonts: [
     {
       provider: fontProviders.google(),
@@ -41,4 +47,6 @@ export default defineConfig({
       weights: [400, 500],
     },
   ],
+
+  adapter: cloudflare(),
 })
