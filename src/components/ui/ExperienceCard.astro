@@ -1,0 +1,84 @@
+---
+interface ExperienceBullet {
+  text: string
+  metric?: string
+}
+
+interface ExperienceCardData {
+  company: string
+  companyUrl?: string
+  role: string
+  period: string
+  location: string
+  bullets: ExperienceBullet[]
+}
+
+interface Props {
+  experience: ExperienceCardData
+}
+
+const { experience } = Astro.props
+---
+
+<article
+  style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 0.75rem; padding: 2rem; display: flex; flex-direction: column; gap: 1rem;"
+>
+  <header style="display: flex; flex-direction: column; gap: 0.25rem;">
+    <div
+      style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;"
+    >
+      <h3
+        style="font-size: 1.125rem; font-weight: 700; color: var(--color-text); margin: 0;"
+      >
+        {experience.role}
+      </h3>
+      <span
+        style="font-family: var(--font-mono), monospace; font-size: 0.8rem; color: var(--color-muted); white-space: nowrap;"
+      >
+        {experience.period}
+      </span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <span style="font-size: 0.95rem; font-weight: 600; color: var(--color-accent);">
+        {experience.company}
+      </span>
+      <span style="font-size: 0.8rem; color: var(--color-muted);">
+        {experience.location}
+      </span>
+    </div>
+  </header>
+
+  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.625rem;">
+    {
+      experience.bullets.map((bullet) => (
+        <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+          <span
+            style="color: var(--color-accent); margin-top: 0.3rem; flex-shrink: 0; font-size: 0.6rem;"
+          >
+            ▶
+          </span>
+          <span style="font-size: 0.9rem; color: var(--color-muted); line-height: 1.6;">
+            {bullet.metric ? (
+              <>
+                {bullet.text.split(bullet.metric).map((textPart, partIndex) => (
+                  <>
+                    {textPart}
+                    {partIndex < bullet.text.split(bullet.metric!).length - 1 && (
+                      <strong
+                        style="font-family: var(--font-mono), monospace; font-weight: 700; color: var(--color-accent);"
+                      >
+                        {bullet.metric}
+                      </strong>
+                    )}
+                  </>
+                ))}
+              </>
+            ) : (
+              bullet.text
+            )}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</article>

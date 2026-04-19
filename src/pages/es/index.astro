@@ -1,0 +1,25 @@
+---
+import type { Locale } from '@/i18n/translations'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Hero from '@/components/sections/Hero.astro'
+import About from '@/components/sections/About.astro'
+import Experience from '@/components/sections/Experience.astro'
+import Projects from '@/components/sections/Projects.astro'
+import Stack from '@/components/sections/Stack.astro'
+import AIWorkflows from '@/components/sections/AIWorkflows.astro'
+import Contact from '@/components/sections/Contact.astro'
+import { getTranslations } from '@/i18n/translations'
+
+const currentLocale: Locale = 'es'
+const translations = getTranslations(currentLocale)
+---
+
+<BaseLayout locale={currentLocale} title={translations.meta.title} description={translations.meta.description}>
+  <Hero locale={currentLocale} />
+  <About locale={currentLocale} />
+  <Experience locale={currentLocale} />
+  <Projects locale={currentLocale} />
+  <Stack locale={currentLocale} />
+  <AIWorkflows locale={currentLocale} />
+  <Contact locale={currentLocale} />
+</BaseLayout>

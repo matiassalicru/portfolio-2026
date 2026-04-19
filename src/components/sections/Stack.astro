@@ -1,0 +1,51 @@
+---
+import { skills, type SkillCategory } from '../../data/skills'
+import SkillBadge from '../ui/SkillBadge.astro'
+import type { Locale } from '@/i18n/translations'
+import { getTranslations } from '@/i18n/translations'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const translations = getTranslations(locale)
+
+const categoryOrder: SkillCategory[] = ['frontend', 'testing', 'tools', 'ui-libs', 'apis', 'ai']
+
+const skillsByCategory = categoryOrder.map((category) => ({
+  category,
+  label: translations.stack.categories[category],
+  items: skills.filter((skill) => skill.category === category),
+}))
+---
+
+<section
+  id="stack"
+  style="padding: 6rem 1.5rem; max-width: 1024px; margin: 0 auto;"
+>
+  <h2
+    style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent); margin: 0 0 3rem;"
+  >
+    {translations.stack.sectionLabel}
+  </h2>
+
+  <div class="reveal" style="display: flex; flex-direction: column; gap: 2.5rem;">
+    {
+      skillsByCategory.map(({ label, items }) => (
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <h3
+            style="font-size: 0.85rem; font-weight: 600; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.08em; margin: 0;"
+          >
+            {label}
+          </h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            {items.map((skill) => (
+              <SkillBadge skill={skill} />
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

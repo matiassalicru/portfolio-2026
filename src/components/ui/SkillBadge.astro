@@ -1,0 +1,17 @@
+---
+import type { Skill } from '../../data/skills'
+
+interface Props {
+  skill: Skill
+}
+
+const { skill } = Astro.props
+
+const isAI = skill.category === 'ai'
+---
+
+<span
+  style={`display: inline-flex; align-items: center; padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.01em; border: 1px solid ${isAI ? 'rgba(168, 85, 247, 0.4)' : 'var(--color-border)'}; background-color: ${isAI ? 'rgba(168, 85, 247, 0.1)' : 'var(--color-surface)'}; color: ${isAI ? 'var(--color-accent)' : 'var(--color-muted)'};`}
+>
+  {skill.name}
+</span>

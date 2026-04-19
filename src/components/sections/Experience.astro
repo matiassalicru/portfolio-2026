@@ -1,0 +1,52 @@
+---
+import { experiences } from '../../data/experience'
+import ExperienceCard from '../ui/ExperienceCard.astro'
+import type { Locale } from '@/i18n/translations'
+import { getTranslations } from '@/i18n/translations'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const translations = getTranslations(locale)
+
+const experienceCards = experiences.map((experience) => {
+  const entry = translations.experience.entries[experience.key as keyof typeof translations.experience.entries]
+  return {
+    company: experience.company,
+    companyUrl: experience.companyUrl,
+    role: entry.role,
+    period: entry.period,
+    location: entry.location,
+    bullets: entry.bullets,
+  }
+})
+---
+
+<section
+  id="experience"
+  style="padding: 6rem 1.5rem; max-width: 1024px; margin: 0 auto;"
+>
+  <h2
+    style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent); margin: 0 0 3rem;"
+  >
+    {translations.experience.sectionLabel}
+  </h2>
+
+  <div style="display: flex; flex-direction: column; gap: 1.5rem; position: relative;">
+    <!-- Subtle timeline line -->
+    <div
+      style="position: absolute; left: -1.5rem; top: 0.5rem; bottom: 0.5rem; width: 1px; background: linear-gradient(to bottom, var(--color-border), transparent); display: none;"
+    >
+    </div>
+
+    {
+      experienceCards.map((experienceCard) => (
+        <div class="reveal">
+          <ExperienceCard experience={experienceCard} />
+        </div>
+      ))
+    }
+  </div>
+</section>

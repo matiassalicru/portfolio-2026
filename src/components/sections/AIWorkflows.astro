@@ -1,0 +1,95 @@
+---
+import { aiWorkflows } from '../../data/aiWorkflows'
+import type { Locale } from '@/i18n/translations'
+import { getTranslations } from '@/i18n/translations'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const translations = getTranslations(locale)
+---
+
+<section
+  id="ai-workflows"
+  style="padding: 6rem 1.5rem; max-width: 1024px; margin: 0 auto;"
+>
+  <h2
+    style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent); margin: 0 0 1rem;"
+  >
+    {translations.aiWorkflows.sectionLabel}
+  </h2>
+
+  <div class="reveal">
+    <p
+      style="font-size: 1rem; color: var(--color-muted); line-height: 1.75; margin: 0 0 3rem; max-width: 640px;"
+    >
+      {translations.aiWorkflows.intro}
+    </p>
+
+    <!-- Capabilities grid -->
+    <div
+      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 3rem;"
+    >
+      {
+        translations.aiWorkflows.capabilities.map((capability) => (
+          <div
+            style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 0.75rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.625rem;"
+          >
+            <h3
+              style="font-size: 0.9rem; font-weight: 700; color: var(--color-text); margin: 0;"
+            >
+              {capability.title}
+            </h3>
+            <p
+              style="font-size: 0.85rem; color: var(--color-muted); line-height: 1.6; margin: 0;"
+            >
+              {capability.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Tools list -->
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <h3
+        style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-muted); margin: 0;"
+      >
+        {translations.aiWorkflows.toolsLabel}
+      </h3>
+      <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+        {
+          aiWorkflows.map((workflow) => (
+            <div
+              style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 1.5rem; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 0.625rem; flex-wrap: wrap;"
+            >
+              <div style="display: flex; flex-direction: column; gap: 0.2rem; min-width: 130px;">
+                <span
+                  style="font-size: 0.9rem; font-weight: 700; color: var(--color-text);"
+                >
+                  {workflow.tool}
+                </span>
+                <span
+                  style="font-size: 0.75rem; color: var(--color-accent); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;"
+                >
+                  {workflow.type}
+                </span>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; flex: 1;">
+                {workflow.usedFor.map((useCase) => (
+                  <span
+                    style="padding: 0.2rem 0.65rem; border-radius: 9999px; border: 1px solid var(--color-border); font-size: 0.75rem; color: var(--color-muted); background-color: rgba(39, 39, 42, 0.5);"
+                  >
+                    {useCase}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

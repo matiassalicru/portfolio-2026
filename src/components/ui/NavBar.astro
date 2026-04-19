@@ -1,0 +1,187 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import type { Locale } from '@/i18n/translations'
+import { getTranslations } from '@/i18n/translations'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const translations = getTranslations(locale)
+
+const navLinks = [
+  { label: translations.nav.about, href: '#about' },
+  { label: translations.nav.experience, href: '#experience' },
+  { label: translations.nav.projects, href: '#projects' },
+  { label: translations.nav.stack, href: '#stack' },
+  { label: translations.nav.ai, href: '#ai-workflows' },
+  { label: translations.nav.contact, href: '#contact' },
+]
+
+const enUrl = getRelativeLocaleUrl('en', '')
+const esUrl = getRelativeLocaleUrl('es', '')
+---
+
+<header
+  id="site-header"
+  style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; background-color: rgba(9, 9, 11, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border);"
+>
+  <nav
+    style="max-width: 1024px; margin: 0 auto; padding: 0 1.5rem; height: 3.5rem; display: flex; align-items: center; justify-content: space-between;"
+  >
+    <a
+      href={getRelativeLocaleUrl(locale, '')}
+      style="font-family: var(--font-mono), monospace; font-weight: 500; font-size: 0.9rem; color: var(--color-accent); text-decoration: none; letter-spacing: -0.01em;"
+    >
+      ms
+    </a>
+
+    <!-- Desktop: nav links + language toggle -->
+    <div class="nav-desktop" style="display: flex; align-items: center; gap: 2rem;">
+      <ul style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+        {
+          navLinks.map((navLink) => (
+            <li>
+              <a
+                href={navLink.href}
+                style="font-size: 0.875rem; font-weight: 500; color: var(--color-muted); text-decoration: none; transition: color 0.2s ease;"
+                onmouseover="this.style.color='var(--color-accent)'"
+                onmouseout="this.style.color='var(--color-muted)'"
+              >
+                {navLink.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <a
+          href={enUrl}
+          style={`font-size: 0.8rem; font-weight: 600; font-family: var(--font-mono), monospace; color: ${locale === 'en' ? 'var(--color-accent)' : 'var(--color-muted)'}; text-decoration: none;`}
+          >EN</a
+        >
+        <span style="color: var(--color-border);">|</span>
+        <a
+          href={esUrl}
+          style={`font-size: 0.8rem; font-weight: 600; font-family: var(--font-mono), monospace; color: ${locale === 'es' ? 'var(--color-accent)' : 'var(--color-muted)'}; text-decoration: none;`}
+          >ES</a
+        >
+      </div>
+    </div>
+
+    <!-- Mobile: language toggle + hamburger button -->
+    <div class="nav-mobile-controls" style="display: none; align-items: center; gap: 1rem;">
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <a
+          href={enUrl}
+          style={`font-size: 0.8rem; font-weight: 600; font-family: var(--font-mono), monospace; color: ${locale === 'en' ? 'var(--color-accent)' : 'var(--color-muted)'}; text-decoration: none;`}
+          >EN</a
+        >
+        <span style="color: var(--color-border);">|</span>
+        <a
+          href={esUrl}
+          style={`font-size: 0.8rem; font-weight: 600; font-family: var(--font-mono), monospace; color: ${locale === 'es' ? 'var(--color-accent)' : 'var(--color-muted)'}; text-decoration: none;`}
+          >ES</a
+        >
+      </div>
+      <button
+        id="nav-toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 44px; height: 44px; background: none; border: none; cursor: pointer; padding: 0;"
+      >
+        <span
+          class="bar"
+          style="display: block; width: 20px; height: 1.5px; background-color: var(--color-muted); transition: transform 0.25s ease, opacity 0.25s ease;"
+        ></span>
+        <span
+          class="bar"
+          style="display: block; width: 20px; height: 1.5px; background-color: var(--color-muted); transition: transform 0.25s ease, opacity 0.25s ease;"
+        ></span>
+        <span
+          class="bar"
+          style="display: block; width: 20px; height: 1.5px; background-color: var(--color-muted); transition: transform 0.25s ease, opacity 0.25s ease;"
+        ></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile dropdown menu -->
+  <div
+    id="nav-mobile-menu"
+    style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background-color: rgba(9, 9, 11, 0.97);"
+  >
+    <ul style="list-style: none; margin: 0; padding: 0.5rem 1.5rem 0.75rem;">
+      {
+        navLinks.map((navLink) => (
+          <li>
+            <a
+              href={navLink.href}
+              class="nav-mobile-link"
+              style="display: block; padding: 0.875rem 0; font-size: 1rem; font-weight: 500; color: var(--color-muted); text-decoration: none; border-bottom: 1px solid var(--color-border); transition: color 0.2s ease;"
+            >
+              {navLink.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<style>
+  @media (max-width: 639px) {
+    .nav-desktop {
+      display: none !important;
+    }
+    .nav-mobile-controls {
+      display: flex !important;
+    }
+  }
+
+  /* Hamburger → X when menu is open */
+  #site-header.menu-open #nav-toggle .bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  #site-header.menu-open #nav-toggle .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  #site-header.menu-open #nav-toggle .bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Remove border on last mobile link */
+  #nav-mobile-menu li:last-child .nav-mobile-link {
+    border-bottom: none;
+  }
+</style>
+
+<script>
+  const siteHeader = document.getElementById('site-header')
+  const navToggle = document.getElementById('nav-toggle')
+  const mobileMenu = document.getElementById('nav-mobile-menu')
+
+  const MENU_EXPANDED_HEIGHT = '400px'
+
+  function openMenu() {
+    siteHeader?.classList.add('menu-open')
+    if (mobileMenu) mobileMenu.style.maxHeight = MENU_EXPANDED_HEIGHT
+    navToggle?.setAttribute('aria-expanded', 'true')
+  }
+
+  function closeMenu() {
+    siteHeader?.classList.remove('menu-open')
+    if (mobileMenu) mobileMenu.style.maxHeight = '0'
+    navToggle?.setAttribute('aria-expanded', 'false')
+  }
+
+  navToggle?.addEventListener('click', () => {
+    siteHeader?.classList.contains('menu-open') ? closeMenu() : openMenu()
+  })
+
+  document.querySelectorAll('.nav-mobile-link').forEach((link) => {
+    link.addEventListener('click', closeMenu)
+  })
+</script>

@@ -1,0 +1,77 @@
+---
+import '../styles/global.css'
+import NavBar from '../components/ui/NavBar.astro'
+import { Font } from 'astro:assets'
+import { getAbsoluteLocaleUrl } from 'astro:i18n'
+import type { Locale } from '@/i18n/translations'
+
+interface Props {
+  title: string
+  description: string
+  locale: Locale
+}
+
+const { title, description, locale } = Astro.props
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="description" content={description} />
+
+    <!-- hreflang alternate links -->
+    <link rel="alternate" hreflang="en" href={getAbsoluteLocaleUrl('en', '')} />
+    <link rel="alternate" hreflang="es" href={getAbsoluteLocaleUrl('es', '')} />
+    <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl('en', '')} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Self-hosted fonts via Astro Fonts API -->
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-mono" />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <NavBar locale={locale} />
+    <main>
+      <slot />
+    </main>
+
+    <script is:inline>
+      (function () {
+        const revealObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible')
+                revealObserver.unobserve(entry.target)
+              }
+            })
+          },
+          { threshold: 0.1 }
+        )
+
+        document.querySelectorAll('.reveal').forEach(function (element) {
+          revealObserver.observe(element)
+        })
+      })()
+    </script>
+  </body>
+</html>
