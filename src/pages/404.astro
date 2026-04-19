@@ -36,9 +36,9 @@ import { Font } from 'astro:assets'
       </h1>
       <p
         id="subtitle"
-        style="font-size: 1.05rem; color: var(--color-muted); margin: 0; line-height: 1.6;"
+        style="font-size: 1.05rem; color: var(--color-muted); margin: 0; line-height: 1.6; min-height: 1.6em;"
       >
-        The URL you're looking for doesn't exist or has moved.
+        This page didn't make it past code review.
       </p>
       <a
         id="back-link"
@@ -60,14 +60,42 @@ import { Font } from 'astro:assets'
           pathname === '/es/' ||
           pathname.startsWith('/es/')
 
+        var englishPhrases = [
+          "This page didn't make it past code review.",
+          '`undefined` is not a page.',
+          'Looks like this URL got garbage-collected.',
+          'git blame says this was never here.',
+          'Stack trace unavailable. Try the homepage.',
+          'This route is missing its handler.',
+          '404: still better than a runtime error.',
+          'The page you requested was deprecated in v2.',
+          'No handler found for this path. And no stack trace either.',
+        ]
+
+        var spanishPhrases = [
+          'Esta página no compila.',
+          'Parece que el link se lo llevó el garbage collector.',
+          '`undefined` no es una página, loco.',
+          'Este URL se mudó sin dejar dirección.',
+          '404: mejor que un runtime error.',
+          'Este endpoint se fue a tomar mate.',
+          'Acá no hay nada. Ni un `<div>`.',
+          'git blame dice que esto nunca existió.',
+          'Esta ruta quedó deprecada en la v2.',
+        ]
+
+        var phrases = isSpanish ? spanishPhrases : englishPhrases
+        var randomPhrase =
+          phrases[Math.floor(Math.random() * phrases.length)]
+
+        document.getElementById('subtitle').textContent = randomPhrase
+
         if (!isSpanish) return
 
         document.documentElement.lang = 'es'
         document.getElementById('page-title').textContent =
           '404 — Página no encontrada · Matias Salicru'
         document.getElementById('heading').textContent = 'Página no encontrada'
-        document.getElementById('subtitle').textContent =
-          'La URL que buscás no existe o se mudó.'
         document.getElementById('back-link-label').textContent =
           'Volver al inicio'
         document.getElementById('back-link').href = '/es/'
