@@ -11,7 +11,14 @@ export const projects: Project[] = [
     name: 'swyd',
     descriptionKey: 'projects.swyd.description',
     repo: 'https://github.com/matiassalicru/swyd',
-    tags: ['React Native', 'Expo', 'TypeScript', 'SQLite', 'Clean Architecture', 'Maestro'],
+    tags: [
+      'React Native',
+      'Expo',
+      'TypeScript',
+      'SQLite',
+      'Clean Architecture',
+      'Maestro',
+    ],
     lang: 'TypeScript',
   },
   {
@@ -25,7 +32,14 @@ export const projects: Project[] = [
     name: 'dashboard',
     descriptionKey: 'projects.dashboard.description',
     repo: 'https://github.com/matiassalicru/dashboard',
-    tags: ['Next.js', 'TypeScript', 'Supabase', 'MUI', 'React Query', 'Playwright'],
+    tags: [
+      'Next.js',
+      'TypeScript',
+      'Supabase',
+      'MUI',
+      'React Query',
+      'Playwright',
+    ],
     lang: 'TypeScript',
   },
 ]

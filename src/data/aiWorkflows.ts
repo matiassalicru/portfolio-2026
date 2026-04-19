@@ -27,4 +27,3 @@ export const aiWorkflows: AIWorkflow[] = [
     usedFor: ['Terminal-based AI assistance', 'Quick code generation'],
   },
 ]
-

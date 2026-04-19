@@ -85,8 +85,7 @@ import { Font } from 'astro:assets'
         ]
 
         var phrases = isSpanish ? spanishPhrases : englishPhrases
-        var randomPhrase =
-          phrases[Math.floor(Math.random() * phrases.length)]
+        var randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
 
         document.getElementById('subtitle').textContent = randomPhrase
 

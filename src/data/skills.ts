@@ -1,4 +1,10 @@
-export type SkillCategory = 'frontend' | 'testing' | 'tools' | 'ui-libs' | 'apis' | 'ai'
+export type SkillCategory =
+  | 'frontend'
+  | 'testing'
+  | 'tools'
+  | 'ui-libs'
+  | 'apis'
+  | 'ai'
 
 export interface Skill {
   name: string

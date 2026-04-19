@@ -21,13 +21,18 @@ const heroMetrics = [
   id="hero"
   style="min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 7rem 1.5rem 5rem; max-width: 1024px; margin: 0 auto;"
 >
-  <div class="reveal" style="display: flex; flex-direction: column; gap: 1.5rem;">
+  <div
+    class="reveal"
+    style="display: flex; flex-direction: column; gap: 1.5rem;"
+  >
     <!-- Location badge -->
     <div>
       <span
         style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.9rem; border-radius: 9999px; border: 1px solid var(--color-border); background-color: var(--color-surface); font-size: 0.8rem; color: var(--color-muted); font-weight: 500;"
       >
-        <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #22c55e; display: inline-block;"></span>
+        <span
+          style="width: 6px; height: 6px; border-radius: 50%; background-color: #22c55e; display: inline-block;"
+        ></span>
         {translations.hero.location}
       </span>
     </div>
@@ -49,10 +54,12 @@ const heroMetrics = [
     </div>
 
     <!-- Metrics row -->
-    <div
-      style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;"
-    >
-      {heroMetrics.map((metric) => <MetricCard value={metric.value} label={metric.label} />)}
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+      {
+        heroMetrics.map((metric) => (
+          <MetricCard value={metric.value} label={metric.label} />
+        ))
+      }
     </div>
 
     <!-- CTA -->

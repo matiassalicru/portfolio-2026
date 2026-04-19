@@ -38,8 +38,12 @@ const { experience } = Astro.props
         {experience.period}
       </span>
     </div>
-    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-      <span style="font-size: 0.95rem; font-weight: 600; color: var(--color-accent);">
+    <div
+      style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;"
+    >
+      <span
+        style="font-size: 0.95rem; font-weight: 600; color: var(--color-accent);"
+      >
         {experience.company}
       </span>
       <span style="font-size: 0.8rem; color: var(--color-muted);">
@@ -48,13 +52,13 @@ const { experience } = Astro.props
     </div>
   </header>
 
-  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.625rem;">
+  <ul
+    style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.625rem;"
+  >
     {
       experience.bullets.map((bullet) => (
         <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
-          <span
-            style="color: var(--color-accent); margin-top: 0.3rem; flex-shrink: 0; font-size: 0.6rem;"
-          >
+          <span style="color: var(--color-accent); margin-top: 0.3rem; flex-shrink: 0; font-size: 0.6rem;">
             ▶
           </span>
           <span style="font-size: 0.9rem; color: var(--color-muted); line-height: 1.6;">
@@ -63,10 +67,9 @@ const { experience } = Astro.props
                 {bullet.text.split(bullet.metric).map((textPart, partIndex) => (
                   <>
                     {textPart}
-                    {partIndex < bullet.text.split(bullet.metric!).length - 1 && (
-                      <strong
-                        style="font-family: var(--font-mono), monospace; font-weight: 700; color: var(--color-accent);"
-                      >
+                    {partIndex <
+                      bullet.text.split(bullet.metric!).length - 1 && (
+                      <strong style="font-family: var(--font-mono), monospace; font-weight: 700; color: var(--color-accent);">
                         {bullet.metric}
                       </strong>
                     )}

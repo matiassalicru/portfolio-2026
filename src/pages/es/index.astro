@@ -14,7 +14,11 @@ const currentLocale: Locale = 'es'
 const translations = getTranslations(currentLocale)
 ---
 
-<BaseLayout locale={currentLocale} title={translations.meta.title} description={translations.meta.description}>
+<BaseLayout
+  locale={currentLocale}
+  title={translations.meta.title}
+  description={translations.meta.description}
+>
   <Hero locale={currentLocale} />
   <About locale={currentLocale} />
   <Experience locale={currentLocale} />

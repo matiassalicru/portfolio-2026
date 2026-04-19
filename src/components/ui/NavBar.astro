@@ -38,8 +38,13 @@ const esUrl = getRelativeLocaleUrl('es', '')
     </a>
 
     <!-- Desktop: nav links + language toggle -->
-    <div class="nav-desktop" style="display: flex; align-items: center; gap: 2rem;">
-      <ul style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+    <div
+      class="nav-desktop"
+      style="display: flex; align-items: center; gap: 2rem;"
+    >
+      <ul
+        style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;"
+      >
         {
           navLinks.map((navLink) => (
             <li>
@@ -71,7 +76,10 @@ const esUrl = getRelativeLocaleUrl('es', '')
     </div>
 
     <!-- Mobile: language toggle + hamburger button -->
-    <div class="nav-mobile-controls" style="display: none; align-items: center; gap: 1rem;">
+    <div
+      class="nav-mobile-controls"
+      style="display: none; align-items: center; gap: 1rem;"
+    >
       <div style="display: flex; gap: 0.5rem; align-items: center;">
         <a
           href={enUrl}

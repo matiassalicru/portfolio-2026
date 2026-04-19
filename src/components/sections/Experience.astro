@@ -12,7 +12,10 @@ const { locale } = Astro.props
 const translations = getTranslations(locale)
 
 const experienceCards = experiences.map((experience) => {
-  const entry = translations.experience.entries[experience.key as keyof typeof translations.experience.entries]
+  const entry =
+    translations.experience.entries[
+      experience.key as keyof typeof translations.experience.entries
+    ]
   return {
     company: experience.company,
     companyUrl: experience.companyUrl,
@@ -34,7 +37,9 @@ const experienceCards = experiences.map((experience) => {
     {translations.experience.sectionLabel}
   </h2>
 
-  <div style="display: flex; flex-direction: column; gap: 1.5rem; position: relative;">
+  <div
+    style="display: flex; flex-direction: column; gap: 1.5rem; position: relative;"
+  >
     <!-- Subtle timeline line -->
     <div
       style="position: absolute; left: -1.5rem; top: 0.5rem; bottom: 0.5rem; width: 1px; background: linear-gradient(to bottom, var(--color-border), transparent); display: none;"
